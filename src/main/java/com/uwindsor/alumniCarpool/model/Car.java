@@ -1,24 +1,19 @@
 package com.uwindsor.alumniCarpool.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.bson.codecs.BinaryCodec;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Document(collection = "cars")
 public class Car {
     @Id
     private String id;
-
     private String plateNum;
-    private BinaryCodec carPhoto;
+    private Object carPhoto;
     private User driver;
     private List<Seat> seats;
 

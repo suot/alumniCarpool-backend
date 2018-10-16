@@ -1,22 +1,17 @@
 package com.uwindsor.alumniCarpool.model;
 
-import java.sql.Date;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.sql.Date;
+
 @Data
-@Document(collection = "orders")
-public class Order {
+@Document(collection = "waitings")
+public class Waiting {
 	@Id
 	private String id;
-
-	private Car car;
-	private String status; //vacant -> full -> finished.
+	private User passenger;
 
 	private String departureCity;
 	private String departureLocation;
@@ -26,18 +21,18 @@ public class Order {
 
 	private String departureDate;
 	private String departureTime;
-	private Date creatingTime; //The insertion time generated in db automatically
 
-	public Order(Car car, String status, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
-		this.car = car;
-		this.status = status;
+	private Boolean valid; //remove -> invalid
+	private Date creatingTime; // Generated automatically by db system.
+
+	public Waiting(User passenger, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime, Boolean valid) {
+		this.passenger = passenger;
 		this.departureCity = departureCity;
 		this.departureLocation = departureLocation;
 		this.arrivalCity = arrivalCity;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.departureTime = departureTime;
+		this.valid = valid;
 	}
-
-
 }
