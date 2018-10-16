@@ -3,6 +3,7 @@ package com.uwindsor.alumniCarpool.controller;
 import com.uwindsor.alumniCarpool.model.Order;
 import com.uwindsor.alumniCarpool.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,6 @@ public class OrderController {
         DELETE	/device-management/devices/{id} : Delete device by "id"
      */
 
-
     @Autowired
     private OrderRepository repository;
 
@@ -30,7 +30,8 @@ public class OrderController {
      * driver creates a new order in db
      * @param order
      */
-    @PostMapping("/")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/create")
     public void createOrder(@Valid @RequestBody Order order){
         repository.save(order); //save = update + insert
     }
@@ -40,7 +41,7 @@ public class OrderController {
      * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
      * @param order
      */
-    @PutMapping("/{id}")
+    @PutMapping("/modify/{id}")
     public void modifyOrderById(@PathVariable("id") String id, @Valid @RequestBody Order order){
         repository.save(order);
     }
@@ -48,10 +49,10 @@ public class OrderController {
     /**
      * driver changes the status of an ongoing order: full --> finished;
      * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
-     * @param id
+     * @param
      */
-    @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable String id){
+    @RequestMapping("/delete/{id}")
+    public void deleteOrder(@PathVariable("id") String id){
         repository.deleteById(id);
     }
 
@@ -60,7 +61,7 @@ public class OrderController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Optional<Order> getOrderById(@PathVariable String id){
         return repository.findById(id);
     }
@@ -73,7 +74,7 @@ public class OrderController {
      * @param departureDate
      * @return
      */
-    @GetMapping("/searchVacantOrders")
+    @GetMapping("/get/allVacant")
     public List<Order> getOrdersBySearch(@RequestParam String departureCity, @RequestParam String arrivalCity, @RequestParam String departureDate){
         return repository.getOrdersBySearch(departureCity, arrivalCity, departureDate);
     }
@@ -85,7 +86,7 @@ public class OrderController {
      * @param email: the driver's username
      * @return List<Order>
      */
-    @GetMapping("/getDriversOngoingOrders/{email}")
+    @GetMapping("/get/drivers/ongoing/{email}")
     public List<Order> getDriversOngoingOrders(@PathVariable String email){
         return repository.getDriversOngoingOrders(email);
     }
@@ -96,7 +97,7 @@ public class OrderController {
      * @param email: the driver's username
      * @return List<Order>
      */
-    @GetMapping("/getDriversFinishedOrders/{email}")
+    @GetMapping("/get/drivers/finished/{email}")
     public List<Order> getDriversFinishedOrders(@PathVariable String email){
         return repository.getDriversFinishedOrders(email);
     }
@@ -107,7 +108,7 @@ public class OrderController {
      * @param email: the passenger's username
      * @return
      */
-    @GetMapping("/getPassengersOngoingOrders/{email}")
+    @GetMapping("/get/passengers/ongoing/{email}")
     public List<Order> getPassengersOngoingOrders(@PathVariable String email){
         return repository.getPassengersOngoingOrders(email);
     }
@@ -118,7 +119,7 @@ public class OrderController {
      * @param email: the passenger's username
      * @return
      */
-    @GetMapping("/getPassengersFinishedOrders/{email}")
+    @GetMapping("/get/passengers/finished/{email}")
     public List<Order> getPassengersFinishedOrders(@PathVariable String email){
         return repository.getPassengersFinishedOrders(email);
     }
