@@ -2,28 +2,55 @@ package com.uwindsor.alumniCarpool.controller;
 
 import com.uwindsor.alumniCarpool.model.Seat;
 import com.uwindsor.alumniCarpool.repository.SeatRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/seats")
 public class SeatController {
-    private SeatRepository seatRepository;
+    @Autowired
+    private SeatRepository repository;
 
-    public SeatController(SeatRepository seatRepository){
-        this.seatRepository = seatRepository;
+    /**
+     * create a new seat
+     * @param seat
+     */
+    @PostMapping("/create")
+    public void createSeat(@Valid @RequestBody Seat seat){
+        repository.save(seat); //save = update + insert
     }
 
-    @GetMapping("/all")
-    public List<Seat> getAll(){
-        List<Seat> seats = this.seatRepository.findAll();
-        return seats;
+    /**
+     * modify a seat when passenger selects it or cancels his/her reservation
+     * @param id
+     * @param seat
+     */
+    @PostMapping("/modify/{id}")
+    public void modifySeatById(@PathVariable("id") String id, @Valid @RequestBody Seat seat){
+        repository.save(seat);
     }
 
-    @PutMapping
-    public void insert(@RequestBody Seat seat){
+    /**
+     * delete a seat when driver cancels the order
+     * @param id
+     */
+    @GetMapping("/delete/{id}")
+    public void deleteSeat(@PathVariable("id") String id){
+        repository.deleteById(id);
+    }
 
+    /**
+     * get seat by id
+     * @param id
+     * @return
+     */
+    @GetMapping("/get/{id}")
+    public Optional<Seat> getSeatById(@PathVariable String id){
+        return repository.findById(id);
     }
 
 }
