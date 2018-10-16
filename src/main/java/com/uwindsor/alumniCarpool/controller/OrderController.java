@@ -3,14 +3,13 @@ package com.uwindsor.alumniCarpool.controller;
 import com.uwindsor.alumniCarpool.model.Order;
 import com.uwindsor.alumniCarpool.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.BooleanOperators;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -41,7 +40,7 @@ public class OrderController {
      * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
      * @param order
      */
-    @PutMapping("/modify/{id}")
+    @PostMapping("/modify/{id}")
     public void modifyOrderById(@PathVariable("id") String id, @Valid @RequestBody Order order){
         repository.save(order);
     }
@@ -51,7 +50,8 @@ public class OrderController {
      * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
      * @param
      */
-    @RequestMapping("/delete/{id}")
+//    @RequestMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public void deleteOrder(@PathVariable("id") String id){
         repository.deleteById(id);
     }

@@ -2,12 +2,15 @@ package com.uwindsor.alumniCarpool.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * Created by Suo Tian on 2018/10/16.
@@ -22,9 +25,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .cors()
+            .and()
             .authorizeRequests()
                 .antMatchers("/js/**","/css/**","/fonts/**","/images/**","/login", "/", "/logout").permitAll();//resources,static,templates,public下面是系统默认的静态资源搜索路径
-                //.anyRequest().authenticated()//要求访问应用的所有用户都要被验证
+            //.anyRequest().authenticated()//要求访问应用的所有用户都要被验证
 //                .and()
 //            .formLogin()
 //                .loginProcessingUrl("/login")
@@ -32,6 +37,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .logout().logoutSuccessUrl("/login");
 }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
