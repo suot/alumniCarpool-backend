@@ -30,7 +30,7 @@ public class UserController {
      * @param id
      */
     @PostMapping("/modify/{id}")
-    public void modifyUserById(@PathVariable("id") String id, @Valid @RequestBody User user){
+    public void modifyUserById(@PathVariable("id") String id, @RequestBody User user){
         repository.save(user);
     }
 
