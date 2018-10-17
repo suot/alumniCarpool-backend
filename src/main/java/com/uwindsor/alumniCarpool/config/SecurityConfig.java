@@ -25,8 +25,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors()
-            .and()
+            .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/js/**","/css/**","/fonts/**","/images/**","/login", "/", "/logout").permitAll();//resources,static,templates,public下面是系统默认的静态资源搜索路径
             //.anyRequest().authenticated()//要求访问应用的所有用户都要被验证

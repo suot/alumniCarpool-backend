@@ -25,6 +25,10 @@ public class Order {
 	private String departureTime;
 	private Date creatingTime; //The insertion time generated in db automatically
 
+    public Order(){
+
+    }
+
 	public Order(Car car, String status, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
 		this.car = car;
 		this.status = status;

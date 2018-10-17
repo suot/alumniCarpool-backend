@@ -17,6 +17,10 @@ public class Seat {
 	private User passenger;
 	private Boolean rated;
 
+	public Seat(){
+
+	}
+
 	public Seat(String position, Boolean reserved, User passenger, Boolean rated) {
 		this.position = position;
 		this.reserved = reserved;

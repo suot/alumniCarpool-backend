@@ -17,6 +17,10 @@ public class Car {
     private User driver;
     private List<Seat> seats;
 
+    public Car(){
+
+    }
+
     public Car(String plateNum, BinaryCodec carPhoto, User driver, List<Seat> seats) {
         this.plateNum = plateNum;
         this.carPhoto = carPhoto;

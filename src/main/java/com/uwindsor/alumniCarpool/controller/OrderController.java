@@ -51,7 +51,7 @@ public class OrderController {
      * @param id
      */
 //    @DeleteMapping("/delete/{id}")
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteOrder(@PathVariable("id") String id){
         repository.deleteById(id);
     }

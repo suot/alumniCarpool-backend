@@ -21,7 +21,7 @@ public class UserController {
      * @param user
      */
     @PostMapping("/create")
-    public void createUser(@Valid @RequestBody User user){
+    public void createUser(@RequestBody User user){
         repository.save(user);
     }
 
