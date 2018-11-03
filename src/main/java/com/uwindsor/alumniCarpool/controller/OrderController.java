@@ -50,7 +50,6 @@ public class OrderController {
      * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
      * @param id
      */
-//    @DeleteMapping("/delete/{id}")
     @DeleteMapping("/delete/{id}")
     public void deleteOrder(@PathVariable("id") String id){
         repository.deleteById(id);

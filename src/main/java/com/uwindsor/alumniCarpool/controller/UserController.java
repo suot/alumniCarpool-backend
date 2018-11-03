@@ -38,7 +38,7 @@ public class UserController {
      * delete a user by admin
      * @param id
      */
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable("id") String id){
         repository.deleteById(id);
     }

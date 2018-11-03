@@ -19,6 +19,7 @@ public class User {
 	private String lastName;
 	private String phone;
 	private BinaryCodec portrait; //GridFS+
+	
 
 	private List<String> roles; //All roles user registered
 	private String currentRole; //The role user logged in with.

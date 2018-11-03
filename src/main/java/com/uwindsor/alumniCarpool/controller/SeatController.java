@@ -38,7 +38,7 @@ public class SeatController {
      * delete a seat when driver cancels the order
      * @param id
      */
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteSeat(@PathVariable("id") String id){
         repository.deleteById(id);
     }

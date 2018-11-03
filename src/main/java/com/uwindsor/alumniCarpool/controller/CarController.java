@@ -36,7 +36,7 @@ public class CarController {
      * delete a car when driver cancels the order
      * @param id
      */
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCar(@PathVariable("id") String id){
         repository.deleteById(id);
     }
