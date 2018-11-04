@@ -19,7 +19,7 @@ public class User {
 	private String lastName;
 	private String phone;
 	private BinaryCodec portrait; //GridFS+
-	
+
 
 	private List<String> roles; //All roles user registered
 	private String currentRole; //The role user logged in with.
@@ -31,10 +31,12 @@ public class User {
 	private Integer rate; //everyone has a rate of 100 initially. When someone rate him/her at 5, he/she get a 1 score added up to the rate; if he/she gets a score of 3, his/her rate is deducted by 1.
 	private List<String> tags;	//NoPet, FrontSeat, SUV...
 
+	private Car car;
+
 	public User() {
 	}
 
-	public User(String email, String password, String firstName, String lastName, String phone, BinaryCodec portrait, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags) {
+	public User(String email, String password, String firstName, String lastName, String phone, BinaryCodec portrait, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
@@ -48,5 +50,6 @@ public class User {
 		this.certificate = certificate;
 		this.rate = rate;
 		this.tags = tags;
+		this.car = car;
 	}
 }

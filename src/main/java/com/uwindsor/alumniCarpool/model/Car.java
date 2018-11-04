@@ -14,17 +14,15 @@ public class Car {
     private String id;
     private String plateNum;
     private Object carPhoto;
-    private User driver;
     private List<Seat> seats;
 
     public Car(){
 
     }
 
-    public Car(String plateNum, BinaryCodec carPhoto, User driver, List<Seat> seats) {
+    public Car(String plateNum, BinaryCodec carPhoto, List<Seat> seats) {
         this.plateNum = plateNum;
         this.carPhoto = carPhoto;
-        this.driver = driver;
         this.seats = seats;
     }
 }

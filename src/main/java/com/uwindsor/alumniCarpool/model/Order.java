@@ -1,6 +1,6 @@
 package com.uwindsor.alumniCarpool.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,7 @@ public class Order {
 	@Id
 	private String id;
 
-	private Car car;
+	private User driver;
 	private String status; //vacant -> full -> finished.
 
 	private String departureCity;
@@ -29,8 +29,8 @@ public class Order {
 
     }
 
-	public Order(Car car, String status, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
-		this.car = car;
+	public Order(User driver, String status, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
+		this.driver = driver;
 		this.status = status;
 		this.departureCity = departureCity;
 		this.departureLocation = departureLocation;
