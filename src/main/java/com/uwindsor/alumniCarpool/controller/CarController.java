@@ -27,8 +27,8 @@ public class CarController {
      * modify a car
      * @param id
      */
-    @PostMapping("/modify/{id}")
-    public void modifySeatById(@PathVariable("id") String id, @Valid @RequestBody Car car){
+    @PostMapping("/update/{id}")
+    public void updateCarById(@PathVariable("id") String id, @Valid @RequestBody Car car){
         repository.save(car);
     }
 

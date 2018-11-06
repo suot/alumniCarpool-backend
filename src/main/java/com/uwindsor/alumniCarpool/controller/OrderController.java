@@ -31,17 +31,16 @@ public class OrderController {
      */
     //@PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/create")
-    public void createOrder(@Valid @RequestBody Order order){
+    public void saveOrder(@RequestBody Order order){
         repository.save(order); //save = update + insert
     }
 
     /**
-     * driver changes the status of an ongoing order: full --> finished;
-     * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
+     * driver changes the status of an ongoing order: Full, Vacant --> On-board;
      * @param order
      */
-    @PostMapping("/modify/{id}")
-    public void modifyOrderById(@PathVariable("id") String id, @Valid @RequestBody Order order){
+    @PutMapping("/update/{id}")
+    public void updateOrderById(@RequestBody Order order){
         repository.save(order);
     }
 
@@ -73,7 +72,7 @@ public class OrderController {
      * @param departureDate
      * @return
      */
-    @GetMapping("/get/allVacant")
+    @GetMapping("/get/allOngoing")
     public List<Order> getOrdersBySearch(@RequestParam String departureCity, @RequestParam String arrivalCity, @RequestParam String departureDate){
         return repository.getOrdersBySearch(departureCity, arrivalCity, departureDate);
     }

@@ -29,8 +29,8 @@ public class SeatController {
      * @param id
      * @param seat
      */
-    @PostMapping("/modify/{id}")
-    public void modifySeatById(@PathVariable("id") String id, @Valid @RequestBody Seat seat){
+    @PostMapping("/update/{id}")
+    public void updateSeatById(@PathVariable("id") String id, @Valid @RequestBody Seat seat){
         repository.save(seat);
     }
 
