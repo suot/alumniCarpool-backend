@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -52,4 +55,21 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable String id){
         return repository.findById(id);
     }
+
+
+    /**
+     * get User by email
+     * @param email
+     * @return
+     */
+    @GetMapping("/get")
+    public User getUserByEmail(@RequestParam String email){
+        Optional<List<User>> userList = repository.getUserByEmail(email);
+        if(userList.isPresent()){
+            return userList.get().get(0);
+        }else {
+            return null;
+        }
+    }
+
 }

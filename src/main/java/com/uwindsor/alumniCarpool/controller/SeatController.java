@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/seats")
 public class SeatController {
@@ -20,7 +22,7 @@ public class SeatController {
      * @param seat
      */
     @PostMapping("/create")
-    public void createSeat(@Valid @RequestBody Seat seat){
+    public void createSeat(@RequestBody Seat seat){
         repository.save(seat); //save = update + insert
     }
 

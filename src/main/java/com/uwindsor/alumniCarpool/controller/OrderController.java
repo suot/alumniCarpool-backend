@@ -20,7 +20,7 @@ public class OrderController {
         GET 	/device-management/devices/{id} : Get the device information identified by "id"
         PUT 	/device-management/devices/{id} : Update the device information identified by "id"
         DELETE	/device-management/devices/{id} : Delete device by "id"
-     */
+    */
 
     @Autowired
     private OrderRepository repository;

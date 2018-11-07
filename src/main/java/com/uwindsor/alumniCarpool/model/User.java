@@ -20,7 +20,6 @@ public class User {
 	private String phone;
 	private BinaryCodec portrait; //GridFS+
 
-
 	private List<String> roles; //All roles user registered
 	private String currentRole; //The role user logged in with.
 
@@ -32,11 +31,13 @@ public class User {
 	private List<String> tags;	//NoPet, FrontSeat, SUV...
 
 	private Car car;
+	private boolean verified;
+
 
 	public User() {
 	}
 
-	public User(String email, String password, String firstName, String lastName, String phone, BinaryCodec portrait, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car) {
+	public User(String email, String password, String firstName, String lastName, String phone, BinaryCodec portrait, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car, boolean verified) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
@@ -51,5 +52,6 @@ public class User {
 		this.rate = rate;
 		this.tags = tags;
 		this.car = car;
+		this.verified = verified;
 	}
 }
