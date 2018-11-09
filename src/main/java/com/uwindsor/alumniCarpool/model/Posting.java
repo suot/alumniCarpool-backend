@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @Document(collection = "postings")
@@ -23,6 +23,10 @@ public class Posting {
 	private String departureTime;
 
 	private Date creatingTime; // Generated automatically by db system.
+
+	public Posting(){
+
+	}
 
 	public Posting(User passenger, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
 		this.passenger = passenger;
