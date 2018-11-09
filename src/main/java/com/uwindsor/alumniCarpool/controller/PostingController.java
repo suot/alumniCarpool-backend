@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -43,5 +44,17 @@ public class PostingController {
     @GetMapping("/get/{id}")
     public Optional<Posting> getPostingById(@PathVariable String id){
         return repository.findById(id);
+    }
+
+    /**
+     * list all postings in db with the constraints of departure, arrival, and departureDate.
+     * @param departureCity
+     * @param arrivalCity
+     * @param departureDate
+     * @return
+     */
+    @GetMapping("/get/all")
+    public List<Posting> getPostingsBySearch(@RequestParam String departureCity, @RequestParam String arrivalCity, @RequestParam String departureDate){
+        return repository.getPostingsBySearch(departureCity, arrivalCity, departureDate);
     }
 }
