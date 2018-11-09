@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.sql.Date;
 
 @Data
-@Document(collection = "waitings")
-public class Waiting {
+@Document(collection = "postings")
+public class Posting {
 	@Id
 	private String id;
 	private User passenger;
@@ -22,10 +22,9 @@ public class Waiting {
 	private String departureDate;
 	private String departureTime;
 
-	private Boolean valid; //remove -> invalid
 	private Date creatingTime; // Generated automatically by db system.
 
-	public Waiting(User passenger, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime, Boolean valid) {
+	public Posting(User passenger, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
 		this.passenger = passenger;
 		this.departureCity = departureCity;
 		this.departureLocation = departureLocation;
@@ -33,6 +32,5 @@ public class Waiting {
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.departureTime = departureTime;
-		this.valid = valid;
 	}
 }

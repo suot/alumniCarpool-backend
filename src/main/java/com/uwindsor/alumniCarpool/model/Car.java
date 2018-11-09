@@ -24,5 +24,6 @@ public class Car {
         this.plateNum = plateNum;
         this.carPhoto = carPhoto;
         this.seats = seats;
+
     }
 }
