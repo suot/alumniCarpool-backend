@@ -1,13 +1,12 @@
 package com.uwindsor.alumniCarpool.controller;
 
-import com.uwindsor.alumniCarpool.model.Car;
 import com.uwindsor.alumniCarpool.model.User;
-import com.uwindsor.alumniCarpool.repository.CarRepository;
 import com.uwindsor.alumniCarpool.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +27,33 @@ public class UserController {
         repository.save(user);
     }
 
+
+    /**
+     * upload avatar to server path: ~/static/images/{id}
+     * @param
+     */
+    @PostMapping("/upload/avatar")
+    public void uploadAvatar(@RequestParam String id, @RequestParam MultipartFile file) throws IOException {
+        //create a folder
+        String userIdPath = UserController.class.getResource("/").getPath() + "static/images/" + id;
+        File userIdDir = new File(userIdPath);
+        if(!userIdDir.exists()){
+            userIdDir.mkdirs();
+        }
+
+        File avatar = new File(userIdDir + "/avatar.jpg");
+        OutputStream os = new FileOutputStream(avatar);
+        os.write(file.getBytes());
+        os.close();
+    }
+
+
+
     /**
      * modify a user
-     * @param id
      */
-    @PostMapping("/update/{id}")
-    public void updateUserById(@PathVariable("id") String id, @RequestBody User user){
+    @PostMapping("/update")
+    public void updateUserById(@RequestBody User user){
         repository.save(user);
     }
 

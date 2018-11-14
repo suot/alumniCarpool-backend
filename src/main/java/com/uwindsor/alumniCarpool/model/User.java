@@ -17,6 +17,7 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String gender;
 	private String phone;
 	private BinaryCodec avator; //GridFS+
 
@@ -37,11 +38,12 @@ public class User {
 	public User() {
 	}
 
-	public User(String email, String password, String firstName, String lastName, String phone, BinaryCodec avator, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car, boolean verified) {
+	public User(String email, String password, String firstName, String lastName, String gender, String phone, BinaryCodec avator, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car, boolean verified) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.gender = gender;
 		this.phone = phone;
 		this.avator = avator;
 		this.roles = roles;
