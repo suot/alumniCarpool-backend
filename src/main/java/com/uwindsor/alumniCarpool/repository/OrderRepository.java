@@ -9,20 +9,20 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends MongoRepository<Order, String>{
-    //4 statuses: Vacant -> Full -> On-board -> Finished
-    @Query("{'departureCity': ?0, 'arrivalCity': ?1, 'departureDate': ?2, 'status': {'$in': ['Vacant', 'Full']}}")
+    //4 status: Boarding -> On-board -> Finished
+    @Query("{'departureCity': ?0, 'arrivalCity': ?1, 'departureDate': ?2, 'status': {'$in': ['Boarding', 'On-board']}}")
     List<Order> getOrdersBySearch(String departureCity, String arrivalCity, String departureDate);
 
-    @Query("{'driver.email': ?0, 'status': {'$in': ['Vacant', 'Full']}}")
-    List<Order> getDriversOngoingOrders(String email);
+    @Query("{'driver.id': ?0, 'status': {'$in': ['Boarding', 'On-board']}}")
+    List<Order> getDriversOngoingOrders(String id);
 
-    @Query("{'driver.email': ?0, 'status': 'Finished'}")
-    List<Order> getDriversFinishedOrders(String email);
+    @Query("{'driver.id': ?0, 'status': 'Finished'}")
+    List<Order> getDriversFinishedOrders(String id);
 
-    @Query("{'status': {'$in': ['Vacant', 'Full']}, 'driver.car.seats': {$elemMatch:{'passenger.email': ?0}}}")
-    List<Order> getPassengersOngoingOrders(String email);
+    @Query("{'status': {'$in': ['Boarding', 'On-board']}, 'driver.car.seats': {$elemMatch:{'passenger.id': ?0}}}")
+    List<Order> getPassengersOngoingOrders(String id);
 
-    @Query("{'status': 'Finished', 'driver.car.seats': {$elemMatch:{'passenger.email': ?0}}}")
-    List<Order> getPassengersFinishedOrders(String email);
+    @Query("{'status': 'Finished', 'driver.car.seats': {$elemMatch:{'passenger.id': ?0}}}")
+    List<Order> getPassengersFinishedOrders(String id);
 
 }

@@ -15,16 +15,16 @@ public class Seat {
 	private String position; //Front, Back-1, Back-2.
 	private Boolean reserved; //Whether it is already reserved by a passenger
 	private User passenger;
-	private Boolean rated;
+	private float rating;
 
 	public Seat(){
 
 	}
 
-	public Seat(String position, Boolean reserved, User passenger, Boolean rated) {
+	public Seat(String position, Boolean reserved, User passenger, float rating) {
 		this.position = position;
 		this.reserved = reserved;
 		this.passenger = passenger;
-		this.rated = rated;
+		this.rating = rating;
 	}
 }

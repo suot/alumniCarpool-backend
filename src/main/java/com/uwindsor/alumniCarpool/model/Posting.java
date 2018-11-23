@@ -11,7 +11,7 @@ import java.util.Date;
 public class Posting {
 	@Id
 	private String id;
-	private User passenger;
+	private User creator;
 
 	private String departureCity;
 	private String departureLocation;
@@ -28,8 +28,8 @@ public class Posting {
 
 	}
 
-	public Posting(User passenger, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
-		this.passenger = passenger;
+	public Posting(User creator, String departureCity, String departureLocation, String arrivalCity, String arrivalLocation, String departureDate, String departureTime) {
+		this.creator = creator;
 		this.departureCity = departureCity;
 		this.departureLocation = departureLocation;
 		this.arrivalCity = arrivalCity;

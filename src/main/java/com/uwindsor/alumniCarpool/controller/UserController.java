@@ -34,6 +34,7 @@ public class UserController {
      */
     @PostMapping("/upload/avatar")
     public void uploadAvatar(@RequestParam String id, @RequestParam MultipartFile file) throws IOException {
+        //@RequestParam MultipartFile file: here file should be the same with frontend: formData.append('file', fileUploading);
         //create a folder
         String userIdPath = UserController.class.getResource("/").getPath() + "static/images/" + id;
         File userIdDir = new File(userIdPath);
@@ -48,11 +49,49 @@ public class UserController {
     }
 
 
+    @PostMapping("/upload/car")
+    public void uploadCar(@RequestParam String id, @RequestParam MultipartFile file) throws IOException {
+        //@RequestParam MultipartFile file: here file should be the same with frontend: formData.append('file', fileUploading);
+        //create a folder
+        String userIdPath = UserController.class.getResource("/").getPath() + "static/images/" + id;
+        File userIdDir = new File(userIdPath);
+        if(!userIdDir.exists()){
+            userIdDir.mkdirs();
+        }
+
+        File avatar = new File(userIdDir + "/car.jpg");
+        OutputStream os = new FileOutputStream(avatar);
+        os.write(file.getBytes());
+        os.close();
+    }
+
+
+    @PostMapping("/upload/certificate")
+    public void uploadCertificate(@RequestParam String id, @RequestParam MultipartFile file) throws IOException {
+        //@RequestParam MultipartFile file: here file should be the same with frontend: formData.append('file', fileUploading);
+        //create a folder
+        String userIdPath = UserController.class.getResource("/").getPath() + "static/images/" + id;
+        File userIdDir = new File(userIdPath);
+        if(!userIdDir.exists()){
+            userIdDir.mkdirs();
+        }
+
+        File avatar = new File(userIdDir + "/certificate.jpg");
+        OutputStream os = new FileOutputStream(avatar);
+        os.write(file.getBytes());
+        os.close();
+    }
+
+
+
+
+
+
 
     /**
      * modify a user
      */
-    @PostMapping("/update")
+    @PutMapping("/update")
     public void updateUserById(@RequestBody User user){
         repository.save(user);
     }

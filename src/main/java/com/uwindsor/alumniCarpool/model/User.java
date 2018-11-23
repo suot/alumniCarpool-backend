@@ -19,16 +19,18 @@ public class User {
 	private String lastName;
 	private String gender;
 	private String phone;
-	private BinaryCodec avator; //GridFS+
+	private BinaryCodec avatar; //GridFS+
 
 	private List<String> roles; //All roles user registered
 	private String currentRole; //The role user logged in with.
 
 	private String almaMater; //User's alma mater
 	private String studentId;
-	private List<BinaryCodec> certificate; //Certificate of alumni, driver license, and so forth.
+	//private List<BinaryCodec> certificate; //Certificate of alumni, driver license, and so forth.
+	private BinaryCodec certificate;
 
-	private Integer rate; //everyone has a rate of 100 initially. When someone rate him/her at 5, he/she get a 1 score added up to the rate; if he/she gets a score of 3, his/her rate is deducted by 1.
+	private float rating; //everyone has a rate of 100 initially. When someone rate him/her at 5, he/she get a 1 score added up to the rate; if he/she gets a score of 3, his/her rate is deducted by 1.
+	private int review; //how many passenger has reviewed this driver;
 	private List<String> tags;	//NoPet, FrontSeat, SUV...
 
 	private Car car;
@@ -38,22 +40,4 @@ public class User {
 	public User() {
 	}
 
-	public User(String email, String password, String firstName, String lastName, String gender, String phone, BinaryCodec avator, List<String> roles, String currentRole, String almaMater, String studentId, List<BinaryCodec> certificate, Integer rate, List<String> tags, Car car, boolean verified) {
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.phone = phone;
-		this.avator = avator;
-		this.roles = roles;
-		this.currentRole = currentRole;
-		this.almaMater = almaMater;
-		this.studentId = studentId;
-		this.certificate = certificate;
-		this.rate = rate;
-		this.tags = tags;
-		this.car = car;
-		this.verified = verified;
-	}
 }

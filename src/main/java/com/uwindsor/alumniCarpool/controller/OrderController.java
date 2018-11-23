@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     /**
-     * driver changes the status of an ongoing order: Full, Vacant --> On-board;
+     * driver changes the status of an ongoing order: Boarding --> On-board;
      * @param order
      */
     @PutMapping("/update/{id}")
@@ -45,8 +45,7 @@ public class OrderController {
     }
 
     /**
-     * driver changes the status of an ongoing order: full --> finished;
-     * system changes the status of a vacant order automatically: vacant --> full -- when every vacant seats are reserved
+     * driver deletes the order
      * @param id
      */
     @DeleteMapping("/delete/{id}")
@@ -66,7 +65,7 @@ public class OrderController {
 
 
     /**
-     * list all vacant orders in db with the constraints of departure, arrival, and departureDate.
+     * list all Boarding and On-board orders in db with the constraints of departure, arrival, and departureDate.
      * @param departureCity
      * @param arrivalCity
      * @param departureDate
@@ -80,45 +79,45 @@ public class OrderController {
 
     /**
      * driver: car.driver.email==email
-     * status: status in ["vacant", "full"]
-     * @param email: the driver's username
+     * status: status in ["Boarding", "On-board"]
+     * @param id: the driver's id
      * @return List<Order>
      */
-    @GetMapping("/get/drivers/ongoing/{email}")
-    public List<Order> getDriversOngoingOrders(@PathVariable String email){
-        return repository.getDriversOngoingOrders(email);
+    @GetMapping("/get/drivers/ongoing")
+    public List<Order> getDriversOngoingOrders(@RequestParam String id){
+        return repository.getDriversOngoingOrders(id);
     }
 
     /**
      * driver: car.driver.email==email
      * status: status = "finished"
-     * @param email: the driver's username
+     * @param id: the driver's id
      * @return List<Order>
      */
-    @GetMapping("/get/drivers/finished/{email}")
-    public List<Order> getDriversFinishedOrders(@PathVariable String email){
-        return repository.getDriversFinishedOrders(email);
+    @GetMapping("/get/drivers/finished")
+    public List<Order> getDriversFinishedOrders(@RequestParam String id){
+        return repository.getDriversFinishedOrders(id);
     }
 
     /**
      * passenger: there exists a seat in car.seats and its passenger.email=email
-     * status: status in ['vacant', 'full']
-     * @param email: the passenger's username
+     * status: status in ['Boarding', 'On-board']
+     * @param id: the passenger's id
      * @return
      */
-    @GetMapping("/get/passengers/ongoing/{email}")
-    public List<Order> getPassengersOngoingOrders(@PathVariable String email){
-        return repository.getPassengersOngoingOrders(email);
+    @GetMapping("/get/passengers/ongoing")
+    public List<Order> getPassengersOngoingOrders(@RequestParam String id){
+        return repository.getPassengersOngoingOrders(id);
     }
 
     /**
      * passenger: there exists a seat in car.seats and its passenger.email=email
      * status: status = "finished"
-     * @param email: the passenger's username
+     * @param id: the passenger's id
      * @return
      */
-    @GetMapping("/get/passengers/finished/{email}")
-    public List<Order> getPassengersFinishedOrders(@PathVariable String email){
-        return repository.getPassengersFinishedOrders(email);
+    @GetMapping("/get/passengers/finished")
+    public List<Order> getPassengersFinishedOrders(@RequestParam String id){
+        return repository.getPassengersFinishedOrders(id);
     }
 }
