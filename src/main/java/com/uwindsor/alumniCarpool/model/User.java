@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Stack;
 
 @Data
 @Document(collection = "users")
@@ -19,7 +20,7 @@ public class User {
 	private String lastName;
 	private String gender;
 	private String phone;
-	private BinaryCodec avatar; //GridFS+
+	private BinaryCodec avatar;
 
 	private List<String> roles; //All roles user registered
 	private String currentRole; //The role user logged in with.
@@ -36,8 +37,18 @@ public class User {
 	private Car car;
 	private boolean verified=false;
 
+	//system messages
+	private Stack<Message> messages;
+
 
 	public User() {
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

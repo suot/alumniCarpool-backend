@@ -42,7 +42,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         * UserDetails(查询数据库得到用户名相对应的密码和权限塞到这个对象中) - UserDetailsService - AuthenticationManager(AuthenticationProvider列表中的每一个AuthenticationProvider依次验证 - 实现类ProviderManager，例如代码中的AuthenticationManagerBuilder auth，auth中存储的是http请求中的用户名和密码信息) - 验证成功后填充到Authentication对象-存储在SecurityContext（HttpSession的一个属性）中。其中AuthenticationManager之后的步骤都是Spring boot框架封装好的。
         */
         //auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication().withUser("admin").password(encodePassword("admin")).roles("admin");
+//        auth.inMemoryAuthentication().withUser("admin").password(encodePassword("admin")).roles("admin");
     }
 
     @Bean
@@ -50,12 +50,4 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    public static String encodePassword(String password){
-        return passwordEncoder().encode(password);
-    }
-
-    //BCryptPasswordEncoder is an algorithm of hashing, not encoding, therefore it provides only the hash/match method rather than the decoding method.
-    public static boolean matchPassword(String password, String hashPassword){
-        return passwordEncoder().matches(password, hashPassword);
-    }
 }

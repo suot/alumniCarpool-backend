@@ -4,6 +4,9 @@ import com.uwindsor.alumniCarpool.model.User;
 import com.uwindsor.alumniCarpool.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
@@ -18,12 +21,18 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     /**
      * create a new user
      * @param user
      */
     @PostMapping("/create")
     public void createUser(@RequestBody User user){
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         repository.save(user);
     }
 
@@ -84,10 +93,6 @@ public class UserController {
 
 
 
-
-
-
-
     /**
      * modify a user
      */
@@ -122,13 +127,21 @@ public class UserController {
      * @return
      */
     @GetMapping("/get")
-    public User getUserByEmail(@RequestParam String email){
-        Optional<List<User>> userList = repository.getUserByEmail(email);
-        if(userList.isPresent()){
-            return userList.get().get(0);
-        }else {
+    public User getUserByEmail(@RequestParam String email, @RequestParam String password){
+        List<User> userList = repository.getUserByEmail(email);
+
+        if(userList == null || userList.isEmpty()){
             return null;
+        }else {
+            User user = userList.get(0);
+            if(passwordEncoder.matches(password, user.getPassword())) {
+                //add token to user
+            }else{
+                user.setPassword("");
+            }
+            return user;
         }
     }
+
 
 }
