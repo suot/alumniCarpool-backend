@@ -1,2 +1,3 @@
 # alumniCarpool-backend
-Spring boot RESTful_MongoDB
+Server: Spring boot RESTful API
+DB: MongoDB Atlas
